@@ -55,13 +55,13 @@ app.put("/repositories/:id", (request, response) => {
 
   const likesIndex = repositoryLikes.findIndex(repository => repository.repository_id == id);
 
-  const sum = repositoryLikes[likesIndex] ? repositoryLikes[likesIndex].likes + 1 : 1;
+  //const sum = repositoryLikes[likesIndex] ? repositoryLikes[likesIndex].likes + 1 : 1;
 
   if (repositoryIndex < 0) {
       return response.status(400).json({ error: 'Repository not found.' });
   }
 
-  const repository = { id, title, url, techs, likes: sum };
+  const repository = { id, title, url, techs, likes: 0 };
 
   repositories[repositoryIndex] = repository;
 
@@ -88,7 +88,7 @@ app.post("/repositories/:id/like", (request, response) => {
   const likesIndex = repositoryLikes.findIndex(repository => repository.repository_id == id);
   const repositoryIndex = repositories.findIndex(repository => repository.id == id);
   
-  const sum = repositoryLikes[likesIndex] ? repositoryLikes[likesIndex].likes + 1 : 0;
+  const sum = repositoryLikes[likesIndex] ? repositoryLikes[likesIndex].likes + 1 : 1;
 
   const like = { id: uuid(), repository_id: id, likes: sum };
 
